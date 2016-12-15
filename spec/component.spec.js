@@ -1,10 +1,10 @@
 const chai = require('chai');
 const expect = chai.expect;
 const logger = require('../src/logger');
-const component = require('../src/component');
+const component = require('../src/components/component');
 
 describe('Test component', function() {
-  const cmp = component();
+  const cmp = component;
   it('should fail', function() {
     expect(false).to.be.false;
   });
@@ -44,7 +44,6 @@ describe('Test component', function() {
     });
 
     it('should have total to be 0', function() {
-      logger.pp(cmp.state$());
       expect(cmp.state$().total).to.eql(records.length);
     });
 

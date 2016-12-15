@@ -16,7 +16,10 @@ module.exports = function(config) {
     frameworks: ['mocha'],
 
     // list of files / patterns to load in the browser
-    files: ['./spec/**/*.spec.js'],
+    files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
+      './spec/**/*.spec.js',
+    ],
 
     // files: [
     //    // './src/**/*.ts',
