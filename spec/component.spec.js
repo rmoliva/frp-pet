@@ -1,5 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
+const logger = require('../src/logger');
 const component = require('../src/component');
 
 describe('Test component', function() {
@@ -43,6 +44,7 @@ describe('Test component', function() {
     });
 
     it('should have total to be 0', function() {
+      logger.pp(cmp.state$());
       expect(cmp.state$().total).to.eql(records.length);
     });
 

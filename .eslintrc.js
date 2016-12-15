@@ -5,10 +5,11 @@ module.exports = {
     ecmaVersion: 7,
   },
   rules: {
-    // Additional, per-project rules...
+    'no-console': 0,
   },
   env: {
     node: true,
     mocha: true,
+    browser: true,
   },
 };

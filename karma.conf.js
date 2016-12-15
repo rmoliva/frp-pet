@@ -52,6 +52,12 @@ module.exports = function(config) {
 
     // level of logging
     logLevel: config.LOG_DEBUG,
+    client: {
+      captureConsole: true,
+      mocha: {
+        bail: true,
+      },
+    },
 
     // disable watching file and executing tests whenever any file changes
     autoWatch: false,
