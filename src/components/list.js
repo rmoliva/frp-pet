@@ -1,19 +1,18 @@
 'use strict';
 
-const S = require('sanctuary');
+const M = require('folktale');
 const R = require('ramda');
-require('fluture');
 const baseComponent = require('./base');
 
 const testRecords = [{
   id: 1,
-  name: 'Uno'
+  name: 'Uno',
 }, {
   id: 2,
-  name: 'Dos'
+  name: 'Dos',
 }];
 
-const fetchRecords = () => {} // Future((rej, res) => res(testRecords));
+const fetchRecords = () => M.IO(() => testRecords);
 
 const initialState = {
   records: [],
@@ -27,7 +26,7 @@ module.exports = function(config) {
     },
     actionCase: function(state) {
       return {
-        loadRecords: () => {} // fetchRecords(),
+        loadRecords: fetchRecords().map((records) => R.merge(state, {records: records})),
       };
     },
   });

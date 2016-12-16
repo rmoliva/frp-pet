@@ -35,10 +35,9 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "fluture": "^4.1.0",
     "flyd": "^0.2.2",
+    "folktale": "^2.0.0-alpha2",
     "ramda": "^0.22.1",
-    "sanctuary": "^0.11.1",
     "union-type": "^0.3.3"
   }
 }
