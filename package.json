@@ -17,6 +17,7 @@
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "chai": "^3.5.0",
+    "chai-counter": "^1.0.0",
     "eslint": "^3.12.2",
     "eslint-config-google": "^0.7.1",
     "faucet": "0.0.1",
