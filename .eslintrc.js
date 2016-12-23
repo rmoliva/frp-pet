@@ -6,6 +6,11 @@ module.exports = {
   },
   rules: {
     'no-console': 0,
+    'new-cap': [
+      'error', {
+        'capIsNewExceptionPattern': '^M\..'
+      }
+    ]
   },
   env: {
     node: true,

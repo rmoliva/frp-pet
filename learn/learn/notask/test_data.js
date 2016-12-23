@@ -1,4 +1,5 @@
 const R = require('ramda');
+const S = require('sanctuary');
 
 module.exports = function(total) {
   let records = R.map(function(value) {
@@ -8,9 +9,9 @@ module.exports = function(total) {
     };
   }, R.times(R.identity, total));
 
-  return {
+  return S.Maybe.of({
     success: true,
     records: records,
     totalCount: total,
-  };
+  });
 };

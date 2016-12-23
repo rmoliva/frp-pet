@@ -1,0 +1,232 @@
+{
+    "project": {
+        "name": "The Foo API",
+        "description": "The Foo API: a library for doing X, Y, and Z",
+        "version": "1.2.1",
+        "url": "http://example.com/"
+    },
+    "files": {
+        "src/components/form/input/component.js": {
+            "name": "src/components/form/input/component.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/components/base.js": {
+            "name": "src/components/base.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 1,
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 22,
+            "description": "This are the actions supported by the component",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 26,
+            "description": "Set the text of the input field",
+            "memberof": "! actionTypes",
+            "itemtype": "method",
+            "name": "actions.setText",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 32,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 37,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 42,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 47,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 52,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 57,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 62,
+            "name": "",
+            "itemtype": "method",
+            "class": ""
+        },
+        {
+            "file": "src/components/form/input/component.js",
+            "line": 69,
+            "name": "",
+            "itemtype": "method",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "- Initial component configuration",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "text",
+                            "description": "- Initial input text",
+                            "type": "String"
+                        },
+                        {
+                            "name": "disabled",
+                            "description": "- Initial disabled state",
+                            "type": "Boolean"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "The component object",
+                "type": "Component"
+            },
+            "class": ""
+        },
+        {
+            "file": "src/components/base.js",
+            "line": 8,
+            "description": "The complete Triforce, or one or more components of the Triforce.",
+            "typedef": "{Object} Component",
+            "itemtype": "property",
+            "name": "actions - Object containing all the actions of the component.",
+            "type": "Object",
+            "class": "",
+            "subprops": [
+                {
+                    "name": "action$",
+                    "description": "- Stream where to put the actions.",
+                    "type": "Stream"
+                },
+                {
+                    "name": "state$",
+                    "description": "- Stream where the component notifies its state.",
+                    "type": "Stream"
+                }
+            ]
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: memberof",
+            "line": " src/components/form/input/component.js:26"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:32"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:32"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:37"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:37"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:42"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:42"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:47"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:47"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:52"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:52"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:57"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:57"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:62"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:62"
+        },
+        {
+            "message": "unknown tag: name",
+            "line": " src/components/form/input/component.js:69"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/components/form/input/component.js:69"
+        },
+        {
+            "message": "unknown tag: typedef",
+            "line": " src/components/base.js:8"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/components/form/input/component.js:1"
+        },
+        {
+            "message": "Missing item type\nThis are the actions supported by the component",
+            "line": " src/components/form/input/component.js:22"
+        }
+    ]
+}

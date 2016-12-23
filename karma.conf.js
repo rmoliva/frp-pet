@@ -1,7 +1,7 @@
 'use strict';
 
 // const webpack = require('webpack');
-const webpackConfig = require('./spec/webpack.config');
+const webpackConfig = require('./src/webpack.test.config');
 
 // Karma configuration
 // Generated on Tue Apr 19 2016 10:44:24 GMT+0200 (CEST)
@@ -18,7 +18,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'node_modules/babel-polyfill/dist/polyfill.js',
-      './spec/**/*.spec.js',
+      './src/**/*.spec.js',
     ],
 
     // files: [
@@ -29,7 +29,7 @@ module.exports = function(config) {
     exclude: [],
 
     preprocessors: {
-      './spec/**/*.spec.js': ['webpack'],
+      './src/**/*.spec.js': ['webpack'],
       // './spec/**/!(*.spec)+(.ts)': ['webpack', 'coverage']
       // './src/**/*.ts': ['coverage']
       // './spec/**/*Spec.ts': ['webpack'],
