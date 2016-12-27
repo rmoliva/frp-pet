@@ -40,6 +40,39 @@ describe('components/base', function() {
 
   const testComponent = baseComponent(componentDefinition);
 
+  describe('_getID', function() {
+    describe('without an ID in the config', function() {
+      beforeEach(function() {
+        // With an ID, componen state should return that ID
+        this.testComponentID = testComponent({
+          disabled: true,
+          text: 'text',
+        });
+      });
+
+      it('should return some ID', function() {
+        expect(this.testComponentID.state$().id).to.not.be.null;
+      });
+    });
+
+    describe('with an ID in the config', function() {
+      beforeEach(function() {
+        const def = {
+          id: 'testComponentID',
+          disabled: true,
+          text: 'text',
+        };
+
+        // With an ID, componen state should return that ID
+        this.testComponentID = testComponent(def);
+      });
+
+      it('should return the specified ID', function() {
+        expect(this.testComponentID.state$().id).to.eql('testComponentID');
+      });
+    });
+  });
+
   describe('with a config component', function() {
     const cmp = testComponent({
       disabled: true,
