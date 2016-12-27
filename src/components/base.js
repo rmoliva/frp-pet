@@ -27,17 +27,19 @@ module.exports = function(options) {
   return function(config) {
     const action$ = flyd.stream();
     const init = R.always(R.merge(options.initialState, _setID(config)));
+    const initialState = init();
 
     const actions = type(options.actionTypes);
 
     const actionFn = (action, state) =>
       action.case(options.actionCase(state));
 
-    const state$ = flyd.scan(R.flip(actionFn), init(), action$);
+    const state$ = flyd.scan(R.flip(actionFn), initialState, action$);
 
     // ds('actions', action$);
 
     return {
+      id: initialState.id,
       actions: actions,
       action$: action$,
       state$: state$,

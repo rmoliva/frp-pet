@@ -71,52 +71,107 @@ describe('components/factory', function() {
     },
   };
 
-  // Registrar los componentes en la factoria
+  // Registrar dos componentes en la factoria
   factoryObject.register('text', componentDefinitions.text);
   factoryObject.register('button', componentDefinitions.button);
 
+  describe('with unregistered component', function() {
+    it('should throw an exception', function() {
+      expect(() => factoryObject.instance({
+        type: 'pepito',
+        disabled: true,
+      })).to.throw(Error);
+    });
+  });
+
+  describe('with no component type', function() {
+    it('should throw an exception', function() {
+      expect(() => factoryObject.instance({
+        disabled: true,
+      })).to.throw(Error);
+    });
+  });
+
   describe('with a config component', function() {
     describe('text component', function() {
-      const cmp = factoryObject.instance({
+      const treeNode = factoryObject.instance({
         type: 'text',
         disabled: true,
         text: 'text',
       });
       it('text should be text', function() {
-        expect(cmp.state$().text).to.eql('text');
+        expect(treeNode.data.state$().text).to.eql('text');
       });
 
       it('disabled should be true', function() {
-        expect(cmp.state$().disabled).to.be.true;
+        expect(treeNode.data.state$().disabled).to.be.true;
       });
     });
     describe('button component', function() {
-      const cmp = factoryObject.instance({
-        type: 'button',
-        disabled: true,
-        clicked: true,
-        value: 'value',
+      beforeEach(function() {
+        this.buttonNode = factoryObject.instance({
+          type: 'button',
+          disabled: true,
+          clicked: true,
+          value: 'value',
+        });
       });
+
       it('value should be value', function() {
-        expect(cmp.state$().value).to.eql('value');
+        expect(this.buttonNode.data.state$().value).to.eql('value');
       });
 
       it('disabled should be true', function() {
-        expect(cmp.state$().disabled).to.be.true;
+        expect(this.buttonNode.data.state$().disabled).to.be.true;
       });
 
       it('clicked should be true', function() {
-        expect(cmp.state$().clicked).to.be.true;
+        expect(this.buttonNode.data.state$().clicked).to.be.true;
       });
     });
-    describe('with unregistered component', function() {
-      it('should throw an exception', function() {
-        const cmp = factoryObject.instance({
-          type: 'pepito',
+  });
+  describe('with a tree config component', function() {
+    beforeEach(function() {
+      this.treeNode = factoryObject.instance({
+        type: 'text',
+        disabled: true,
+        text: 'text',
+        items: [{
+          type: 'button',
           disabled: true,
-        });
+          value: 'value',
+          clicked: true,
+        }],
+      });
+    });
 
+    describe('parent component', function() {
+      it('should have a child', function() {
+        expect(this.treeNode.children.length).to.eql(1);
+      });
+    });
 
+    describe('children component component', function() {
+      beforeEach(function() {
+        this.treeChild = factoryObject.treeManager.findNodeById(
+          this.treeNode.children[0]
+        );
+      });
+
+      it('should have a parent', function() {
+        expect(this.treeChild.parent).to.eql(this.treeNode.id);
+      });
+
+      it('value should be value', function() {
+        expect(this.treeChild.data.state$().value).to.eql('value');
+      });
+
+      it('disabled should be true', function() {
+        expect(this.treeChild.data.state$().disabled).to.be.true;
+      });
+
+      it('clicked should be true', function() {
+        expect(this.treeChild.data.state$().clicked).to.be.true;
       });
     });
   });
