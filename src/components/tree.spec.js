@@ -1,10 +1,10 @@
 const chai = require('chai');
 const expect = chai.expect;
-const R = require('ramda');
+// const R = require('ramda');
 const componentTree = require('./tree');
 
 describe('components/tree', function() {
-  const _nodes = [];
+  const _nodes = {};
   const _tree = componentTree(_nodes);
 
   it('getRoots should be empty', function() {

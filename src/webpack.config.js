@@ -44,4 +44,5 @@ module.exports = {
     system: '{}',
     file: '{}',
   },
+  target: 'node',
 };

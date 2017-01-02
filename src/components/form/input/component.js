@@ -4,9 +4,10 @@
 'use strict';
 
 const R = require('ramda');
-const baseComponent = require('../../base');
 
 const initialState = {
+  type: 'input',
+  visible: true,
   disabled: false,
   error: false,
   fluid: false,
@@ -30,7 +31,8 @@ const isMaybe = R.T;
  * SuperWidget instances.
  * @type {Object}
  * @memberof components/form.Field
- * @property {function} setDisabled(Boolean) - Sets the disbaled state of the input field.
+ * @property {function} setDisabled(Boolean) - Sets the disabled state of the input field.
+ * @property {function} setVisible(Boolean) - Sets the visible state of the input field.
  * @property {function} setError(Boolean) - Sets the error state of the input field.
  * @property {function} setFluid(Boolean) - Sets the fluid state of the input field.
  * @property {function} setIcon(Maybe) - Sets the icon class of the input field.
@@ -46,6 +48,7 @@ const isMaybe = R.T;
  */
 const actionTypes = {
   setDisabled: [Boolean],
+  setVisible: [Boolean],
   setError: [Boolean],
   setFluid: [Boolean],
   setIcon: [isMaybe],
@@ -69,6 +72,8 @@ const formInputComponent = {
     return {
       // setDisabled:: (boolean) => state
       setDisabled: (disabled) => R.merge(state, {disabled: disabled}),
+      // setVisible:: (boolean) => state
+      setVisible: (visible) => R.merge(state, {visible: visible}),
       // setError:: (boolean) => state
       setError: (error) => R.merge(state, {error: error}),
       // setFluid:: (boolean) => state
@@ -104,6 +109,7 @@ const formInputComponent = {
  * @memberof components/form
  * @param {Object} config - Initial component configuration
  * @param {Boolean} config.disabled - Initial disabled state
+ * @param {Boolean} config.visible - Initial visible state
  * @param {Boolean} config.error - Initial error state
  * @param {Boolean} config.fluid - Initial fluid state
  * @param {String} config.icon - Icon classes of the input
@@ -112,4 +118,4 @@ const formInputComponent = {
  * @param {String} config.text - Initial input text
  * @return {Component} The component object
  */
-module.exports = baseComponent(formInputComponent);
+module.exports = formInputComponent;

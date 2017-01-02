@@ -1,12 +1,17 @@
 const chai = require('chai');
 const expect = chai.expect;
-const flyd = require('flyd');
 const M = require('monet');
 const input = require('./component');
+const baseComponent = require('../../base');
 
 describe('components/form/input', function() {
   describe('initialState', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
+
+    it('type should be input', function() {
+      expect(cmp.state$().type).to.eql('input');
+    });
+
     it('text should be empty', function() {
       expect(cmp.state$().text).to.eql('');
     });
@@ -41,7 +46,7 @@ describe('components/form/input', function() {
   });
 
   describe('setText', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setText(M.Some('hola')));
@@ -61,7 +66,7 @@ describe('components/form/input', function() {
   });
 
   describe('setIcon', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setIcon(M.Some('icon')));
@@ -81,7 +86,7 @@ describe('components/form/input', function() {
   });
 
   describe('setLabel', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setLabel(M.Some('label')));
@@ -101,7 +106,7 @@ describe('components/form/input', function() {
   });
 
   describe('setSize', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setSize(M.Some('size')));
@@ -121,7 +126,7 @@ describe('components/form/input', function() {
   });
 
   describe('setWide', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setWide(M.Some(10)));
@@ -141,7 +146,7 @@ describe('components/form/input', function() {
   });
 
   describe('setDisabled', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setDisabled(true));
     });
@@ -151,7 +156,7 @@ describe('components/form/input', function() {
   });
 
   describe('setError', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setError(true));
     });
@@ -161,7 +166,7 @@ describe('components/form/input', function() {
   });
 
   describe('setFluid', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setFluid(true));
     });
@@ -171,7 +176,7 @@ describe('components/form/input', function() {
   });
 
   describe('setInline', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setInline(true));
     });
@@ -181,7 +186,7 @@ describe('components/form/input', function() {
   });
 
   describe('setLoading', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setLoading(true));
     });
@@ -191,7 +196,7 @@ describe('components/form/input', function() {
   });
 
   describe('setReadOnly', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setReadOnly(true));
     });
@@ -201,7 +206,7 @@ describe('components/form/input', function() {
   });
 
   describe('setRequired', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setRequired(true));
     });
@@ -211,7 +216,7 @@ describe('components/form/input', function() {
   });
 
   describe('setTransparent', function() {
-    const cmp = input();
+    const cmp = baseComponent(input)();
     beforeEach(function() {
       cmp.action$(cmp.actions.setTransparent(true));
     });

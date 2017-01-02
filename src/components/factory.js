@@ -7,7 +7,7 @@ const Factory = function() {
   const _componentDefinitions = {};
 
   // Arbol de componentes instanciados
-  const _treeNodes = [];
+  const _treeNodes = {};
   const _tree = componentTree(_treeNodes);
 
   const _typeShouldExist = function(config) {

@@ -12,6 +12,7 @@ describe('components/base', function() {
 
   // Definir estado inicial
   const initialState = {
+    type: 'input', // Just for test
     disabled: false,
     text: '',
   };
@@ -39,6 +40,20 @@ describe('components/base', function() {
   };
 
   const testComponent = baseComponent(componentDefinition);
+
+  describe('without type', function() {
+    beforeEach(function() {
+      this.withoutTypeComponent = baseComponent(R.merge(componentDefinition, {
+        initialState: R.merge(componentDefinition.initialState, {
+          type: null,
+        }),
+      }));
+    });
+
+    it('should throw an error', function() {
+      expect(() => this.withoutTypeComponent()).to.throw(Error);
+    });
+  });
 
   describe('_getID', function() {
     describe('without an ID in the config', function() {

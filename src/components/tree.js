@@ -4,7 +4,8 @@ const R = require('ramda');
 const Tree = function(nodes) {
   const getRoots = function() {
     // Retrieve all nodes without parents
-    return R.filter(R.compose(R.isNil, R.prop('parent')), nodes);
+    let keys = R.filter(R.compose(R.isNil, R.prop('parent')), R.values(nodes));
+    return R.props(R.map(R.prop('id'), keys), nodes);
   };
 
   const addNode = function(data) {
@@ -15,8 +16,8 @@ const Tree = function(nodes) {
       parent: null,
     };
 
-    // Anadir el node directamente al array
-    nodes = R.concat(nodes, [newNode]);
+    // Anadir el node em el set
+    nodes = R.assoc(data.id, newNode, nodes);
     return newNode;
   };
 
@@ -32,17 +33,13 @@ const Tree = function(nodes) {
       parent: newParentNode.id,
     });
 
-    // Quitar los nodos anteriores
-    nodes = R.reject(function(node) {
-      return (node.id === parentNode.id || node.id === childrenNode.id);
-    }, nodes);
-
-    // Anadir los nuevos nodos
-    nodes = R.concat(nodes, [newParentNode, newChildrenNode]);
+    // Poner el nuevo elemento en la misma referencia
+    nodes = R.assoc(newParentNode.id, newParentNode, nodes);
+    nodes = R.assoc(newChildrenNode.id, newChildrenNode, nodes);
   };
 
   const findNodeById = function(nodeId) {
-    return R.find(R.propEq('id', nodeId), nodes);
+    return R.prop(nodeId, nodes);
   };
 
   const clean = function(callback) {
