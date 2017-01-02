@@ -3,7 +3,7 @@
 const flyd = require('flyd');
 const R = require('ramda');
 const type = require('union-type');
-const uuidV4 = require('uuid/v4');
+const uuid = require('./uuid');
 const ds = require('../ds');
 
 /**
@@ -22,7 +22,7 @@ module.exports = function(options) {
     // Si hay un ID establecido no tocarlo
     if (!config.id) {
       // Si no hay ID generar uno propio
-      config = R.merge(config, {id: uuidV4()});
+      config = R.merge(config, {id: uuid()});
     }
 
     // Si no hay items, inicializar un array vacio
@@ -82,14 +82,14 @@ module.exports = function(options) {
     // Si se pasa una funcion de vista hay que generar un stream de vista
     // Asociado con dicha funcion y los cambios de vista en los hijos
     if (options.viewFn) {
-      view$ = flyd.combine(
+      view$ = flyd.immediate(flyd.combine(
         options.viewFn({
           actions: actions,
           action$: action$,
           state$: state$,
         }),
         values$
-      );
+      ));
     }
 
     return {

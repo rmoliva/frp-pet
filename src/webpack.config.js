@@ -24,7 +24,6 @@ module.exports = {
 
   // Add minification
   plugins: [
-
     // new webpack.optimize.UglifyJsPlugin()
   ],
   module: {
@@ -45,4 +44,5 @@ module.exports = {
     file: '{}',
   },
   target: 'node',
+  watch: true,
 };

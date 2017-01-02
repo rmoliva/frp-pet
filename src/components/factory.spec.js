@@ -21,6 +21,10 @@ describe('components/factory', function() {
       click: false,
       value: '',
     },
+    input: {
+      disabled: false,
+      text: '',
+    },
   };
 
   // Definir action types de prueba
@@ -33,6 +37,10 @@ describe('components/factory', function() {
       setDisabled: [Boolean],
       click: [Boolean],
       setValue: [isMaybe],
+    },
+    input: {
+      setDisabled: [Boolean],
+      setText: [isMaybe],
     },
   };
 
@@ -56,6 +64,14 @@ describe('components/factory', function() {
         setValue: (value) => R.merge(state, {value: value.orSome('')}),
       };
     },
+    input: function(state) {
+      return {
+        // setDisabled:: (boolean) => state
+        setDisabled: (disabled) => R.merge(state, {disabled: disabled}),
+        // setText:: (Maybe) => state
+        setText: (text) => R.merge(state, {text: text.orSome('')}),
+      };
+    },
   };
 
   const componentDefinitions = {
@@ -68,6 +84,11 @@ describe('components/factory', function() {
       initialState: initialStates.button,
       actionTypes: actionTypes.button,
       actionCase: actionCases.button,
+    },
+    input: {
+      initialState: initialStates.input,
+      actionTypes: actionTypes.input,
+      actionCase: actionCases.input,
     },
   };
 
@@ -139,19 +160,23 @@ describe('components/factory', function() {
         items: [{
           type: 'button',
           disabled: true,
-          value: 'value',
+          value: 'value1',
           clicked: true,
+        }, {
+          type: 'button',
+          disabled: false,
+          value: 'value2',
         }],
       });
     });
 
     describe('parent component', function() {
-      it('should have a child', function() {
-        expect(this.treeNode.children.length).to.eql(1);
+      it('should have two children', function() {
+        expect(this.treeNode.children.length).to.eql(2);
       });
     });
 
-    describe('children component component', function() {
+    describe('first children component', function() {
       beforeEach(function() {
         this.treeChild = factoryObject.treeManager.findNodeById(
           this.treeNode.children[0]
@@ -162,8 +187,12 @@ describe('components/factory', function() {
         expect(this.treeChild.parent).to.eql(this.treeNode.id);
       });
 
+      it('should be of type button', function() {
+        expect(this.treeChild.data.state$().type).to.eql('button');
+      });
+
       it('value should be value', function() {
-        expect(this.treeChild.data.state$().value).to.eql('value');
+        expect(this.treeChild.data.state$().value).to.eql('value1');
       });
 
       it('disabled should be true', function() {
@@ -172,6 +201,30 @@ describe('components/factory', function() {
 
       it('clicked should be true', function() {
         expect(this.treeChild.data.state$().clicked).to.be.true;
+      });
+    });
+
+    describe('second children component', function() {
+      beforeEach(function() {
+        this.treeChild = factoryObject.treeManager.findNodeById(
+          this.treeNode.children[1]
+        );
+      });
+
+      it('should have a parent', function() {
+        expect(this.treeChild.parent).to.eql(this.treeNode.id);
+      });
+
+      it('should be of type button', function() {
+        expect(this.treeChild.data.state$().type).to.eql('button');
+      });
+
+      it('value should be value', function() {
+        expect(this.treeChild.data.state$().value).to.eql('value2');
+      });
+
+      it('disabled should be false', function() {
+        expect(this.treeChild.data.state$().disabled).to.be.false;
       });
     });
   });

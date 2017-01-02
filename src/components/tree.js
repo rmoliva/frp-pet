@@ -21,7 +21,10 @@ const Tree = function(nodes) {
     return newNode;
   };
 
-  const setParent = function(parentNode, childrenNode) {
+  const setParent = function(parentNodeId, childrenNodeId) {
+    let parentNode = findNodeById(parentNodeId);
+    let childrenNode = findNodeById(childrenNodeId);
+
     let newParentNode = R.merge(parentNode, {
       children: R.concat(
         R.defaultTo([], parentNode.children),
@@ -36,6 +39,8 @@ const Tree = function(nodes) {
     // Poner el nuevo elemento en la misma referencia
     nodes = R.assoc(newParentNode.id, newParentNode, nodes);
     nodes = R.assoc(newChildrenNode.id, newChildrenNode, nodes);
+
+    return nodes;
   };
 
   const findNodeById = function(nodeId) {

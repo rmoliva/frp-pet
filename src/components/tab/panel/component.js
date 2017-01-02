@@ -4,6 +4,7 @@
 'use strict';
 
 const R = require('ramda');
+const view = require('./view');
 
 const initialState = {
   type: 'tabpanel',
@@ -40,6 +41,8 @@ const tabPanelComponent = {
       setTitle: (title) => R.merge(state, {title: title.orSome('')}),
     };
   },
+
+  viewFn: view,
 };
 
 /**

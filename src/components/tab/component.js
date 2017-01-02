@@ -5,7 +5,6 @@
 
 const R = require('ramda');
 const view = require('./view');
-const baseComponent = require('../base');
 
 const initialState = {
   type: 'tab',

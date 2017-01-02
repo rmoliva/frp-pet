@@ -97,7 +97,7 @@ describe('components/tree', function() {
 
         describe('make third element children of the first', function() {
           beforeEach(function() {
-            _tree.setParent(this.firstNode, this.thirdNode);
+            _tree.setParent(this.firstNode.id, this.thirdNode.id);
           });
 
           it('getRoots should return two elements', function() {

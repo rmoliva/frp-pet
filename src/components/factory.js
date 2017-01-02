@@ -1,4 +1,5 @@
 const R = require('ramda');
+
 const componentTree = require('./tree');
 const baseComponent = require('./base');
 
@@ -48,7 +49,7 @@ const Factory = function() {
 
     // Asginar este como padre de todos los hijos
     R.forEach(function(treeItemNode) {
-      _tree.setParent(treeNode, treeItemNode);
+      let nodes = _tree.setParent(treeNode.id, treeItemNode.id);
     }, treeItemNodes);
 
     return _tree.findNodeById(treeNode.id);
