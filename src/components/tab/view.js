@@ -52,7 +52,7 @@ const tabView = function(options) {
     if (item) {
       return item.view$();
     }
-    throw new Error(`No tab defined for active tab: ${state.active}`);
+    console.log(`No tab defined for active tab: ${state.active}`);
   };
 
   const _tabComponentView = function() {

@@ -20,12 +20,16 @@ describe('components/form/input', function() {
       expect(cmp.state$().icon).to.eql('');
     });
 
-    it('size should be empty', function() {
-      expect(cmp.state$().size).to.eql('');
+    it('inputtype should be text', function() {
+      expect(cmp.state$().inputtype).to.eql('text');
     });
 
     it('loading should be false', function() {
       expect(cmp.state$().loading).to.be.false;
+    });
+
+    it('placeholder should be empty', function() {
+      expect(cmp.state$().placeholder).to.eql('');
     });
 
     it('disabled should be false', function() {
@@ -85,6 +89,26 @@ describe('components/form/input', function() {
     });
   });
 
+  describe('setInputType', function() {
+    const cmp = baseComponent(input)();
+    describe('Some', function() {
+      beforeEach(function() {
+        cmp.action$(cmp.actions.setInputType(M.Some('password')));
+      });
+      it('inputtype should be set', function() {
+        expect(cmp.state$().inputtype).to.eql('password');
+      });
+    });
+    describe('None', function() {
+      beforeEach(function() {
+        cmp.action$(cmp.actions.setInputType(M.None()));
+      });
+      it('inputtype should not be set', function() {
+        expect(cmp.state$().inputtype).to.eql('text');
+      });
+    });
+  });
+
   describe('setLabel', function() {
     const cmp = baseComponent(input)();
     describe('Some', function() {
@@ -105,22 +129,22 @@ describe('components/form/input', function() {
     });
   });
 
-  describe('setSize', function() {
+  describe('setPlaceholder', function() {
     const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
-        cmp.action$(cmp.actions.setSize(M.Some('size')));
+        cmp.action$(cmp.actions.setPlaceholder(M.Some('placeholder')));
       });
-      it('size should be set', function() {
-        expect(cmp.state$().size).to.eql('size');
+      it('placeholder should be set', function() {
+        expect(cmp.state$().placeholder).to.eql('placeholder');
       });
     });
     describe('None', function() {
       beforeEach(function() {
-        cmp.action$(cmp.actions.setSize(M.None()));
+        cmp.action$(cmp.actions.setPlaceholder(M.None()));
       });
-      it('size should not be set', function() {
-        expect(cmp.state$().size).to.eql('');
+      it('placeholder should not be set', function() {
+        expect(cmp.state$().placeholder).to.eql('');
       });
     });
   });
@@ -131,7 +155,7 @@ describe('components/form/input', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setWide(M.Some(10)));
       });
-      it('size should be set', function() {
+      it('wide should be set', function() {
         expect(cmp.state$().wide).to.eql(10);
       });
     });
@@ -139,7 +163,7 @@ describe('components/form/input', function() {
       beforeEach(function() {
         cmp.action$(cmp.actions.setWide(M.None()));
       });
-      it('size should not be set', function() {
+      it('wide should not be set', function() {
         expect(cmp.state$().wide).to.eql(0);
       });
     });
@@ -172,16 +196,6 @@ describe('components/form/input', function() {
     });
     it('fluid should be true', function() {
       expect(cmp.state$().fluid).to.be.true;
-    });
-  });
-
-  describe('setInline', function() {
-    const cmp = baseComponent(input)();
-    beforeEach(function() {
-      cmp.action$(cmp.actions.setInline(true));
-    });
-    it('inline should be true', function() {
-      expect(cmp.state$().inline).to.be.true;
     });
   });
 

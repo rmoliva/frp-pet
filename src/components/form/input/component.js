@@ -4,23 +4,24 @@
 'use strict';
 
 const R = require('ramda');
+const view = require('./view');
 
 const initialState = {
   type: 'input',
-  visible: true,
-  disabled: false,
-  error: false,
-  fluid: false,
-  icon: '',
-  inline: false,
-  label: '',
-  loading: false,
-  readonly: false,
-  required: false,
-  size: '',
-  text: '',
+  disabled: false, // *
+  error: false, // *
+  fluid: false, // *
+  icon: '', // *
+  label: '', // *
+  loading: false, // *
+  placeholder: '', // *
+  readonly: false, // *
+  required: false, // *
+  text: '', // *
+  inputtype: 'text', // *
   transparent: false,
-  wide: 0,
+  visible: true, // *
+  wide: 0, // *
 };
 
 // TODO
@@ -36,12 +37,12 @@ const isMaybe = R.T;
  * @property {function} setError(Boolean) - Sets the error state of the input field.
  * @property {function} setFluid(Boolean) - Sets the fluid state of the input field.
  * @property {function} setIcon(Maybe) - Sets the icon class of the input field.
- * @property {function} setInline(Boolean) - Sets the inline class of the input field.
+ * @property {function} setInputType(Maybe) - Sets the type of the input field.
  * @property {function} setLabel(Maybe) - Sets the text of the label of the input field.
+ * @property {function} setPlaceholder (Maybe) - Sets the text of the placeholder of the input field.
  * @property {function} setRequired(Boolean) - Sets input field to be required.
  * @property {function} setLoading(Boolean) - Sets the loading state of the input field.
  * @property {function} setReadOnly(Boolean) - Sets input field to be readonly.
- * @property {function} setSize(Maybe) - Sets the class size of the input field.
  * @property {function} setText(Maybe) - Sets the text of the input field.
  * @property {function} setTransparent(Boolean) - Sets the transparent state of the input field.
  * @property {function} setWide(Number) - Sets the width of the input field.
@@ -52,10 +53,10 @@ const actionTypes = {
   setError: [Boolean],
   setFluid: [Boolean],
   setIcon: [isMaybe],
-  setInline: [Boolean],
+  setInputType: [isMaybe],
   setLabel: [isMaybe],
   setLoading: [Boolean],
-  setSize: [isMaybe],
+  setPlaceholder: [isMaybe],
   setText: [isMaybe],
   setReadOnly: [Boolean],
   setRequired: [Boolean],
@@ -80,18 +81,18 @@ const formInputComponent = {
       setFluid: (fluid) => R.merge(state, {fluid: fluid}),
       // setIcon:: (Maybe) => state
       setIcon: (icon) => R.merge(state, {icon: icon.orSome('')}),
-      // setInline:: (boolean) => state
-      setInline: (inline) => R.merge(state, {inline: inline}),
+      // setInputType:: (Maybe) => state
+      setInputType: (inputtype) => R.merge(state, {inputtype: inputtype.orSome('text')}),
       // setLabel:: (Maybe) => state
       setLabel: (label) => R.merge(state, {label: label.orSome('')}),
       // setLoading:: (boolean) => state
       setLoading: (loading) => R.merge(state, {loading: loading}),
+      // setPlaceholder:: (Maybe) => state
+      setPlaceholder: (placeholder) => R.merge(state, {placeholder: placeholder.orSome('')}),
       // setReadOnly:: (boolean) => state
       setReadOnly: (readonly) => R.merge(state, {readonly: readonly}),
       // setRequired:: (boolean) => state
       setRequired: (required) => R.merge(state, {required: required}),
-      // setSize:: (Maybe) => state
-      setSize: (size) => R.merge(state, {size: size.orSome('')}),
       // setText:: (Maybe) => state
       setText: (text) => R.merge(state, {text: text.orSome('')}),
       // setTransparent:: (boolean) => state
@@ -101,6 +102,8 @@ const formInputComponent = {
       setWide: (wide) => R.merge(state, {wide: wide.orSome(0)}),
     };
   },
+
+  viewFn: view,
 };
 
 /**
@@ -113,8 +116,9 @@ const formInputComponent = {
  * @param {Boolean} config.error - Initial error state
  * @param {Boolean} config.fluid - Initial fluid state
  * @param {String} config.icon - Icon classes of the input
+ * @param {String} config.inputtype - Type of the input
  * @param {Boolean} config.loading - Initial loading state
- * @param {String} config.size - Size class of the input
+ * @param {String} config.placeholder - Initial placeholder text
  * @param {String} config.text - Initial input text
  * @return {Component} The component object
  */
