@@ -14,10 +14,11 @@ const initialState = {
   icon: '', // *
   label: '', // *
   loading: false, // *
+  name: '',
   placeholder: '', // *
   readonly: false, // *
   required: false, // *
-  text: '', // *
+  value: '', // *
   inputtype: 'text', // *
   transparent: false,
   visible: true, // *
@@ -39,11 +40,12 @@ const isMaybe = R.T;
  * @property {function} setIcon(Maybe) - Sets the icon class of the input field.
  * @property {function} setInputType(Maybe) - Sets the type of the input field.
  * @property {function} setLabel(Maybe) - Sets the text of the label of the input field.
+ * @property {function} setName(String) - Sets the text of the name of the input field.
  * @property {function} setPlaceholder (Maybe) - Sets the text of the placeholder of the input field.
  * @property {function} setRequired(Boolean) - Sets input field to be required.
  * @property {function} setLoading(Boolean) - Sets the loading state of the input field.
  * @property {function} setReadOnly(Boolean) - Sets input field to be readonly.
- * @property {function} setText(Maybe) - Sets the text of the input field.
+ * @property {function} setValue(Maybe) - Sets the value of the input field.
  * @property {function} setTransparent(Boolean) - Sets the transparent state of the input field.
  * @property {function} setWide(Number) - Sets the width of the input field.
  */
@@ -56,8 +58,9 @@ const actionTypes = {
   setInputType: [isMaybe],
   setLabel: [isMaybe],
   setLoading: [Boolean],
+  setName: [String],
   setPlaceholder: [isMaybe],
-  setText: [isMaybe],
+  setValue: [isMaybe],
   setReadOnly: [Boolean],
   setRequired: [Boolean],
   setTransparent: [Boolean],
@@ -87,14 +90,16 @@ const formInputComponent = {
       setLabel: (label) => R.merge(state, {label: label.orSome('')}),
       // setLoading:: (boolean) => state
       setLoading: (loading) => R.merge(state, {loading: loading}),
+      // setName:: (string) => state
+      setName: (name) => R.merge(state, {name: name}),
       // setPlaceholder:: (Maybe) => state
       setPlaceholder: (placeholder) => R.merge(state, {placeholder: placeholder.orSome('')}),
       // setReadOnly:: (boolean) => state
       setReadOnly: (readonly) => R.merge(state, {readonly: readonly}),
       // setRequired:: (boolean) => state
       setRequired: (required) => R.merge(state, {required: required}),
-      // setText:: (Maybe) => state
-      setText: (text) => R.merge(state, {text: text.orSome('')}),
+      // setValue:: (Maybe) => state
+      setValue: (value) => R.merge(state, {value: value.orSome('')}),
       // setTransparent:: (boolean) => state
       setTransparent: (transparent) =>
         R.merge(state, {transparent: transparent}),
@@ -118,8 +123,9 @@ const formInputComponent = {
  * @param {String} config.icon - Icon classes of the input
  * @param {String} config.inputtype - Type of the input
  * @param {Boolean} config.loading - Initial loading state
+ * @param {String} config.name - Initial name state
  * @param {String} config.placeholder - Initial placeholder text
- * @param {String} config.text - Initial input text
+ * @param {String} config.value - Initial input value
  * @return {Component} The component object
  */
 module.exports = formInputComponent;

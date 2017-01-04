@@ -56,9 +56,18 @@ module.exports = function(options) {
     const actionFn = (action, state) =>
       action.case(options.actionCase(state));
 
+    // Inicializar el componente si hay funcion de inicializacion
+    if (options.initialize) {
+      options.initialize({
+        initialState: initialState,
+        actions: actions,
+        action$: action$,
+      });
+    }
+
     const state$ = flyd.scan(R.flip(actionFn), initialState, action$);
 
-    // ds('actions', action$);
+    // ds('state', state$);
 
     const destroy = function() {
       // Call destroy function if provided

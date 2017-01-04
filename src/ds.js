@@ -3,8 +3,16 @@ const flyd = require('flyd');
 
 module.exports = function(name, stream) {
   flyd.on(function(response) {
-    console.log(`S: ${name} -----------------------------------------`);
+    if (console.group) {
+      console.group(name);
+    } else {
+      console.log(`S: ${name} -----------------------------------------`);
+    }
     console.log(response);
-    console.log(`E: ${name} -----------------------------------------`);
+    if (console.groupEnd) {
+      console.groupEnd();
+    } else {
+      console.log(`E: ${name} -----------------------------------------`);
+    }
   }, stream);
 };

@@ -12,8 +12,12 @@ describe('components/form/input', function() {
       expect(cmp.state$().type).to.eql('input');
     });
 
-    it('text should be empty', function() {
-      expect(cmp.state$().text).to.eql('');
+    it('value should be empty', function() {
+      expect(cmp.state$().value).to.eql('');
+    });
+
+    it('name should be empty', function() {
+      expect(cmp.state$().name).to.eql('');
     });
 
     it('icon should be empty', function() {
@@ -49,23 +53,33 @@ describe('components/form/input', function() {
     });
   });
 
-  describe('setText', function() {
+  describe('setValue', function() {
     const cmp = baseComponent(input)();
     describe('Some', function() {
       beforeEach(function() {
-        cmp.action$(cmp.actions.setText(M.Some('hola')));
+        cmp.action$(cmp.actions.setValue(M.Some('hola')));
       });
-      it('text should be set', function() {
-        expect(cmp.state$().text).to.eql('hola');
+      it('value should be set', function() {
+        expect(cmp.state$().value).to.eql('hola');
       });
     });
     describe('None', function() {
       beforeEach(function() {
-        cmp.action$(cmp.actions.setText(M.None()));
+        cmp.action$(cmp.actions.setValue(M.None()));
       });
-      it('text should not be set', function() {
-        expect(cmp.state$().text).to.eql('');
+      it('value should not be set', function() {
+        expect(cmp.state$().value).to.eql('');
       });
+    });
+  });
+
+  describe('setName', function() {
+    const cmp = baseComponent(input)();
+    beforeEach(function() {
+      cmp.action$(cmp.actions.setName('nombre'));
+    });
+    it('name should be set', function() {
+      expect(cmp.state$().name).to.eql('nombre');
     });
   });
 
